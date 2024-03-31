@@ -1,7 +1,3 @@
-# What is this?
-
-This is the source code for various AO3 scripts that I have written.
-
 # How do I use these?
 
 First, you will need to install  the browser extension [Tampermonkey](https://www.tampermonkey.net/index.php), or something similar.
