@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Akira/Ren Name Switcher for AO3 (site-wide; REN AMAMIYA PREFERRED)
+// @name         Akira/Ren Name Switcher for AO3 (site-wide; AKIRA KURUSU PREFERRED)
 // @namespace    github.com/forceofcalm
-// @version      0.1
-// @description  Switches the names Akira Kurusu to Ren Amamiya on AO3 on works tagged as Persona 5.
+// @version      0.2
+// @description  Switches the name Ren Amamiya to Akira Kurusu on AO3 on works tagged as Persona 5.
 // @author       calm
 // @match        https://archiveofourown.org/works/*
 // @icon         [later]
@@ -14,18 +14,22 @@ const names = {
   akira: {
     first: "Akira",
     last: "Kurusu",
-    regexFirst: new RegExp(`\bAkira\b`),
-    regexFirstLower: new RegExp(`\bakira\b`),
-    regexLast: new RegExp(`\bKurusu\b`),
-    regexLastLower: new RegExp(`\bkurusu\b`),
+    regexFirst: new RegExp(String.raw`\bAkira\b`, 'gu'),
+    regexFirstLower: new RegExp(String.raw`\bakira\b`, 'gu'),
+    regexFirstUpper: new RegExp(String.raw`\bAKIRA\b`, 'gu'),
+    regexLast: new RegExp(String.raw`\bKurusu\b`, 'gu'),
+    regexLastLower: new RegExp(String.raw`\bkurusu\b`, 'gu'),
+    regexLastUpper: new RegExp(String.raw`\bKURUSU\b`, 'gu'),
   },
   ren: {
     first: "Ren",
     last: "Amamiya",
-    regexFirst: new RegExp(`\bRen\b`),
-    regexFirstLower: new RegExp(`\bren\b`),
-    regexLast: new RegExp(`\bAmamiya\b`),
-    regexLastLower: new RegExp(`\bamamiya\b`),
+    regexFirst: new RegExp(String.raw`\bRen\b`, 'gu'),
+    regexFirstLower: new RegExp(String.raw`\bren\b`, 'gu'),
+    regexFirstUpper: new RegExp(String.raw`\bREN\b`, 'gu'),
+    regexLast: new RegExp(String.raw`\bAmamiya\b`, 'gu'),
+    regexLastLower: new RegExp(String.raw`\bamamiya\b`, 'gu'),
+    regexLastUpper: new RegExp(String.raw`\bAMAMIYA\b`, 'gu'),
   },
 }
 
@@ -60,7 +64,8 @@ const otherName = names.akira;
 
   function replaceWord(node, oldWord, newWord) {
     if (node.nodeType === Node.TEXT_NODE) {
-        node.textContent = node.textContent.replace(new RegExp(oldWord, 'gi'), newWord);
+      console.log(oldWord)
+        node.textContent = node.textContent.replace(oldWord, newWord);
     } else if (node.hasChildNodes()) {
         node.childNodes.forEach(childNode => {
             replaceWord(childNode, oldWord, newWord);
@@ -69,16 +74,14 @@ const otherName = names.akira;
   }
 
   // normally cased names
-  replaceWord(workText, otherName.first, preferredName.first);
-  replaceWord(workText, otherName.last, preferredName.last);
+  replaceWord(workText, otherName.regexFirst, preferredName.first);
+  replaceWord(workText, otherName.regexLast, preferredName.last);
 
   // lower cased names
-  replaceWord(workText, otherName.first.toLowerCase(), preferredName.first.toLowerCase());
-  replaceWord(workText, otherName.last.toLowerCase(), preferredName.last.toLowerCase());
+  replaceWord(workText, otherName.regexFirstLower, preferredName.first.toLowerCase());
+  replaceWord(workText, otherName.regexLastLower, preferredName.last.toLowerCase());
 
   // upper cased names
-  replaceWord(workText, otherName.first.toUpperCase(), preferredName.first.toUpperCase());
-  replaceWord(workText, otherName.last.toUpperCase(), preferredName.last.toUpperCase());
-
-  console.log('Akira/Ren Name Switcher: Names switched successfully.');
+  replaceWord(workText, otherName.regexFirstUpper, preferredName.first.toUpperCase());
+  replaceWord(workText, otherName.regexLastUpper, preferredName.last.toUpperCase());
 })();
