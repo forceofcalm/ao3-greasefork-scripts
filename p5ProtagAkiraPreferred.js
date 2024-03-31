@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Akira/Ren Name Switcher for AO3 (site-wide; AKIRA KURUSU PREFERRED)
+// @name         Akira/Ren Name Switcher for AO3 (site-wide; REN AMAMIYA PREFERRED)
 // @namespace    github.com/forceofcalm
 // @version      0.2
-// @description  Switches the name Ren Amamiya to Akira Kurusu on AO3 on works tagged as Persona 5.
+// @description  Switches the name Akira Kurusu to Ren Amamiya on AO3 on works tagged as Persona 5.
 // @author       calm
 // @match        https://archiveofourown.org/works/*
 // @icon         [later]
