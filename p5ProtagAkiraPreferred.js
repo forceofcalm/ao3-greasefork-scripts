@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Akira/Ren Name Switcher for AO3 (site-wide; AKIRA KURUSU PREFERRED)
 // @namespace    github.com/forceofcalm
-// @version      0.4
+// @version      0.5
 // @description  Switches the name Ren Amamiya to Akira Kurusu on AO3 on works tagged as Persona 5.
 // @author       calm
 // @match        https://archiveofourown.org/works/*
@@ -48,8 +48,7 @@ const otherName = names.ren;
   const preferredLastName = preferredName.regexLast.test(workText.textContent) || preferredName.regexLastLower.test(workText.textContent);
   const otherLastName = otherName.regexLast.test(workText.textContent) || otherName.regexLastLower.test(workText.textContent);
 
-
-  const hasBothNames = otherFirstName && preferredFirstName || preferredLastName && otherLastName;
+  const hasBothNames = (otherFirstName || preferredLastName) && (otherFirstName && otherLastName);
 
   // check that work only has one of the names
   if (hasBothNames) {
