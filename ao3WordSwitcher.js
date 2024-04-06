@@ -13,10 +13,12 @@
 // ADD YOUR WORD PREFERENCES HERE
 // format: ['word to be replaced', 'preferred word'],
 // the quotes and comma are important!
+// also these are examples, you can replace them with whatever you want
 const words = [
   ['oi', 'hey'],
   ['gray', 'grey'],
   ['roommates', 'flatmates'],
+  ['one', 'two'],
 ];
 
 (() => {
@@ -24,7 +26,7 @@ const words = [
 
   words.forEach(([oldWord, newWord]) => {
       const regex = new RegExp(String.raw`\b${oldWord}\b`, 'gu');
-      const regexCapitalized = new RegExp(String.raw`\b${oldWord[0].toUpperCase + oldWord.slice(1).toLowerCase()}\b`, 'gu');
+      const regexCapitalized = new RegExp(String.raw`\b${oldWord[0].toUpperCase() + oldWord.toLowerCase().slice(1)}\b`, 'gu');
       const regexLower = new RegExp(String.raw`\b${oldWord}\b`, 'gu');
       const regexUpper = new RegExp(String.raw`\b${oldWord}\b`, 'gu');
       const regexIgnoreCase = new RegExp(String.raw`\b${oldWord}\b`, 'gui');
